@@ -17,7 +17,7 @@ export const useFetch = (url) => {
         method,
         headers: {
           "Content-Type": "application/json",
-        },
+          },
         body: JSON.stringify(data),
       });
       setMethod("POST");

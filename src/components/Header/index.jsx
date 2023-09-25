@@ -9,7 +9,7 @@ import Moon from "./assets/moon.png";
 
 const Cabecalho = styled.header`
   width: 100%;
-  height: 6rem;
+  height: 13vh;
   background-color: #06004e;
   display: flex;
   justify-content: space-between;
@@ -56,6 +56,8 @@ const Cabecalho = styled.header`
         transition-duration: 200ms;
         font-size: 18px;
         font-weight: bold;
+        transition-duration: 400ms;
+        border-bottom: 2px solid transparent;
 
         &.active {
           border-bottom: 2px solid goldenrod;
@@ -181,8 +183,8 @@ const Cabecalho = styled.header`
         position: absolute;
         background-color: #06004e;
         width: 0%;
-        top: 6rem;
-        height: calc(100vh - 6rem);
+        top: 13vh;
+        height: calc(100vh - 13vh);
         left: 0;
 
         &.active{
@@ -253,7 +255,7 @@ const Header = () => {
               <NavLink to="/relatorios">Relatorios</NavLink>
             </li>
             <li>
-              <NavLink to="/documentos">Sobre</NavLink>
+              <NavLink to="/sobre">Sobre</NavLink>
             </li>
           </ul>
         </nav>

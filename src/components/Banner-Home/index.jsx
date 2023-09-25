@@ -4,8 +4,9 @@ import ART from './assets/ART.svg'
 
 const ContainerBanner = styled.div`
     width: 100%;
-    height: calc(100vh - 12.9vh);
+    /* height: calc(100vh - 13vh); */
     display: flex;
+    flex-wrap: wrap;
     background-color: #4f6e7a;
     
         & .image-banner{
@@ -70,6 +71,7 @@ const ContainerBanner = styled.div`
                                 font-weight: bold;
                                 display: flex;
                                 align-items: center;
+
                                     & box-icon{
                                         fill: yellow;
                                     }
@@ -77,6 +79,69 @@ const ContainerBanner = styled.div`
                     }
                 }
 
+        }
+
+        @media only screen and (max-width: 480px){
+            flex-direction: column;
+
+                & .image-banner{
+                    width: 100%;
+                }
+
+                & .texto-banner{
+                    width: 100%;
+                    padding: 0;
+
+                        & h1{
+                            width: 100%;
+                            font-size: 1.5rem;
+                        }
+
+                        & .slogan{
+                            & h3{
+                                font-size: 1rem;
+                            }
+
+                            & ul {
+                                width: 100%;
+
+                                    & li{
+                                        font-size: 1rem;
+                                    }
+                            }
+                        }
+                }
+        }
+
+        @media only screen and (min-width: 480px) and (max-width: 768px){
+            width: 100%;
+            height: 100vh;
+
+            & .image-banner{
+                & img{
+                    object-fit: cover;
+                }
+            }
+            
+            & .texto-banner{
+                padding: 0;
+                
+                & h1{
+                    font-size: 1.5rem;
+                }
+
+                & .slogan{
+                    & h3{
+                        font-size: 1rem;
+                    }
+                    & ul{
+                        & li{
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+            }
         }
 `;
 
@@ -97,12 +162,12 @@ const Banner = () => {
                         <h3>A Indexa Te Ajuda !</h3>
                         <h4>Nossos Serviços:</h4>
                         <ul>
-                            <li><box-icon name='money-withdraw'></box-icon>Recuperação Financeira de Credito</li>
-                            <li><box-icon name='bank' type='solid' ></box-icon>Intermediação Financeira em instituições bancarias</li>
-                            <li><box-icon name='file-find' type='solid' ></box-icon>Consultas Cadastrais de alto nivel</li>
-                            <li><box-icon name='business' type='solid' ></box-icon>Consultoria Empresarial</li>
-                            <li><box-icon name='candles' ></box-icon>Auditorias Empresariais</li>
-                            <li><box-icon name='bar-chart-alt-2' type='solid' ></box-icon>Fundos de Investimento</li>
+                            <li><box-icon name='money-withdraw'></box-icon><strong>Recuperação Financeira de Credito</strong></li>
+                            <li><box-icon name='bank' type='solid' ></box-icon><strong>Intermediação Financeira em instituições bancarias</strong></li>
+                            <li><box-icon name='file-find' type='solid' ></box-icon><strong>Consultas Cadastrais de alto nivel</strong></li>
+                            <li><box-icon name='business' type='solid' ></box-icon><strong>Consultoria Empresarial</strong></li>
+                            <li><box-icon name='candles' ></box-icon><strong>Auditorias Empresariais</strong></li>
+                            <li><box-icon name='bar-chart-alt-2' type='solid' ></box-icon><strong>Fundos de Investimento</strong></li>
                         </ul>
                     </div>
                 </div>
