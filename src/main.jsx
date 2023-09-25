@@ -11,6 +11,7 @@ export const Estilo =createGlobalStyle`
     list-style: none;
     text-decoration: none;
     outline: none;
+    font-family: 'Montserrat', sans-serif;
   }
 
 `;
