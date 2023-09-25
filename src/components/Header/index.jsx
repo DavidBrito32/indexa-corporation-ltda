@@ -238,7 +238,7 @@ const Header = () => {
           <img src={Logo} alt="" />
         </div>
 
-        <nav className={burguer && "dark-mode active"}>
+        <nav className={burguer ? "dark-mode active" : undefined}>
           <ul>
             <li>
               <NavLink to="/">Home</NavLink>

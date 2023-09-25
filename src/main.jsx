@@ -13,7 +13,6 @@ export const Estilo =createGlobalStyle`
     outline: none;
     font-family: 'Montserrat', sans-serif;
   }
-
 `;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
