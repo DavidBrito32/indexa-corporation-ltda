@@ -5,7 +5,7 @@ import BG from "./assets/BG.svg";
 
 const ContainerConsulta = styled.div`
   width: 100%;
-  height: calc(100vh - 13vh);
+  height: 100vh;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
