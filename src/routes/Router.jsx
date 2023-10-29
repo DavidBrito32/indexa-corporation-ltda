@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import PublicLayout from "../layouts/Public";
 import HomePage from "../pages/HomePage";
 import ErrorPage from "../pages/Error";
@@ -11,7 +11,7 @@ import { DadosEmpresasProvider } from "../context/DadosEmpresa";
 const Router = () => {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<PublicLayout />}>
             <Route index element={<HomePage />} />
@@ -26,7 +26,7 @@ const Router = () => {
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 };
