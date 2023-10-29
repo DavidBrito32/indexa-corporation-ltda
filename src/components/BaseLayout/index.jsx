@@ -71,7 +71,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton color="white.500" fontSize="1rem" display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem color="white.500" endereco={link.path} fontSize={{base: "22px", md: "24px"}} key={link.name} icon={link.icon}>
+        <NavItem color="white.500" onClick={onClose} endereco={link.path} fontSize={{base: "22px", md: "24px"}} key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
       ))}
