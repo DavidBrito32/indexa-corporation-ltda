@@ -43,7 +43,7 @@ const BaseLayout = () => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+      <MobileNav display={{ base: 'flex', md: 'none' }} onClose={onClose} onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }}>
         <Box minH={{base: "50vh", md: "68vh"}}>
           <Outlet />
@@ -63,6 +63,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
+      onClick={onClose}
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Box >
@@ -113,7 +114,7 @@ const NavItem = ({ icon, endereco, children, ...rest }) => {
   )
 }
 
-const MobileNav = ({ onOpen, ...rest }) => {
+const MobileNav = ({ onOpen, onClose, ...rest }) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
