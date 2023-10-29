@@ -1,13 +1,11 @@
-import Ways from './routes/index';
-import { HooksProvider } from './context/index'
+import Router from "./routes/Router"
+
 
 const App = () => {
 
   return (
     <>
-      <HooksProvider>
-        <Ways />
-      </HooksProvider>
+      <Router/>
     </>
   )
 }

@@ -1,14 +1,11 @@
-import { Outlet } from "react-router-dom";
-import Header from "../../components/Header";
+import BaseLayout from "../../components/BaseLayout";
 
-
-const LayoutPage = () => {
+const PublicLayout = () => {
     return (
         <>
-            <Header />
-            <Outlet />
+            <BaseLayout />            
         </>
     )
 }
 
-export default LayoutPage;
+export default PublicLayout;
