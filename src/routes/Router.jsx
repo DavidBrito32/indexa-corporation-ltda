@@ -7,6 +7,7 @@ import ContactPage from "../pages/ContactPage";
 import Consultas from "../pages/Consultas";
 import Relatorios from "../pages/Relatorios";
 import { DadosEmpresasProvider } from "../context/DadosEmpresa";
+import RelatoriosPage from "../pages/RelatoriosPage";
 
 const Router = () => {
   return (
@@ -17,11 +18,22 @@ const Router = () => {
             <Route index element={<HomePage />} />
             <Route path="/contabil" element={<Contabil />} />
             <Route path="/consultas" element={<Consultas />} />
-              <Route path="/relatorios" element={
-              <DadosEmpresasProvider>
-                <Relatorios />
-              </DadosEmpresasProvider>
-                }/>
+            <Route
+              path="/cadastro"
+              element={
+                <DadosEmpresasProvider>
+                  <Relatorios />
+                </DadosEmpresasProvider>
+              }
+            />
+            <Route
+              path="/relatorios"
+              element={
+                <DadosEmpresasProvider>
+                  <RelatoriosPage />
+                </DadosEmpresasProvider>
+              }
+            />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>

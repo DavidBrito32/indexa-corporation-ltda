@@ -14,7 +14,7 @@ import {
 import {
   FiMenu,
 } from 'react-icons/fi';
-import {FcSearch, FcHome, FcBullish, FcList, FcBusinessContact} from 'react-icons/fc';
+import {FcSearch, FcHome, FcBullish, FcOpenedFolder, FcList, FcBusinessContact} from 'react-icons/fc';
 import {Outlet, NavLink } from 'react-router-dom';
 import Footer from '../Footer';
 import Logo from './assets/logo.png';
@@ -23,7 +23,8 @@ const LinkItems= [
   { name: 'Home', icon: FcHome, path: "/" },
   { name: 'Contabil', icon: FcBullish, path: "/contabil" },
   { name: 'Consultas', icon: FcSearch, path: "/consultas" },
-  { name: 'Relatorios', icon: FcList, path: "/relatorios" },
+  { name: 'Cadastro', icon: FcOpenedFolder, path: "/cadastro" },
+  {name: 'Relatorios', icon: FcList, path: "/relatorios"},
   { name: 'Contact', icon: FcBusinessContact, path: "/contact" },
 ]
 const BaseLayout = () => {
@@ -114,7 +115,7 @@ const NavItem = ({ icon, endereco, children, ...rest }) => {
   )
 }
 
-const MobileNav = ({ onOpen, onClose, ...rest }) => {
+const MobileNav = ({ onOpen, ...rest }) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
