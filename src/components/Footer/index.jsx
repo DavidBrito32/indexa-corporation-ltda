@@ -10,6 +10,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
+import {Link} from 'react-router-dom'
 
 const ListHeader = ({ children }) => {
   return (
@@ -50,21 +51,15 @@ export default function Footer() {
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={"flex-start"}>
             <ListHeader>Sobre a Empresa</ListHeader>
-            <Box as="a" href={"/contact"}>
+            <Box as={Link} to={"/contact"}>
               Sobre
             </Box>
           </Stack>
 
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Box as="a" href={"#"}>
-              Help Center
-            </Box>
-            <Box as="a" href={"#"}>
-              Safety Center
-            </Box>
-            <Box as="a" href={"#"}>
-              Community Guidelines
+            <Box as={Link} to={"/contact"}>
+              Contato
             </Box>
           </Stack>
 

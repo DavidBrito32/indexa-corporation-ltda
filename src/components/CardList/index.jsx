@@ -4,10 +4,16 @@ import { Box, Container, Flex, Heading, Text } from "@chakra-ui/layout";
 import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import brasil from "./assets/brasao.png";
 import { FcOpenedFolder } from "react-icons/fc";
+import { ImBin } from "react-icons/im";
 import CardEmpresas from "../CardEmpresas";
 
-const CardList = ({ empresa }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+const CardList = ({ empresa, setDados, dados }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const deleteItem = () => {
+      const novasEmpresas = dados.filter((item) => item.id !== empresa.id);
+      setDados(novasEmpresas);
+      localStorage.setItem('dados', JSON.stringify(novasEmpresas))
+    }
   return (
     <>
       <Container>
@@ -60,6 +66,21 @@ const CardList = ({ empresa }) => {
               right={{ base: "0", md: "10px" }}
             >
               <FcOpenedFolder onClick={onOpen} title="Ver detalhes" cursor={"pointer"} />
+            </Box>
+            <Box
+              transition={"all ease-in 200ms"}
+              _active={{ transform: "scale(.97)" }}
+              position={"absolute"}
+              fontSize={{ base: "1.5rem", md: "1.9rem" }}
+              _hover={{
+                fontSize: { base: "1.8rem", md: "2.3rem" },
+                transform: "rotate(15deg)",
+                color: "red.500"
+              }}
+              bottom={{ base: "0px", md: "10px" }}
+              right={{ base: "0", md: "10px" }}
+            >
+              <ImBin onClick={deleteItem} title="Ver detalhes" cursor={"pointer"} />
             </Box>
           </Box>
         </Flex>

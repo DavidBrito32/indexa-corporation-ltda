@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { DadosEmpresasContext } from "../../context/DadosEmpresa";
 
 const RelatoriosPage = () => {
-    const { dados } = useContext(DadosEmpresasContext);
+    const { dados, setDados } = useContext(DadosEmpresasContext);
     const [search, setSearch] = useState("");
     console.log(dados);
     return (
@@ -27,7 +27,7 @@ const RelatoriosPage = () => {
                         }
                     })
                     .map(item => (
-                        <CardList key={item.id} empresa={item} />
+                        <CardList key={item.id} empresa={item} setDados={setDados} dados={dados} />
                     ))
                 }
 

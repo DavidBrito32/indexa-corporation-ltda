@@ -126,6 +126,10 @@ const CardEmpresas = ({ empresa }) => {
                 </Select>
                 )
               }
+              <Text>Regime Tributario:</Text>
+              <Text fontWeight={"bold"} color={"blue.400"}>{empresa.regime_tributario}</Text>
+              <Text>Data da primeira consulta:</Text>
+              <Text>{empresa.id}</Text>
             </Box>
           </Box>
         </Flex>
