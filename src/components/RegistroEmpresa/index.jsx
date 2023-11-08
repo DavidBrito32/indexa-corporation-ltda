@@ -12,7 +12,6 @@ import {
   GridItem,
   FormLabel,
   Input,
-  Select,
   SimpleGrid,
   InputLeftAddon,
   InputGroup,
@@ -33,7 +32,10 @@ const Form1 = () => {
       <Flex w="full">
         <FormControl mr="5%">
           <FormLabel htmlFor="razao_social" fontWeight={"normal"}>
-            Razão Social <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+            Razão Social{" "}
+            <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+              *
+            </Text>
           </FormLabel>
           <Input
             id="razao_social"
@@ -45,11 +47,11 @@ const Form1 = () => {
         </FormControl>
 
         <FormControl>
-          <FormLabel
-            htmlFor="regime_tributario"
-            fontWeight={"normal"}
-          >
-            Regime Tributário <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          <FormLabel htmlFor="regime_tributario" fontWeight={"normal"}>
+            Regime Tributário{" "}
+            <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+              *
+            </Text>
           </FormLabel>
           <Input
             id="regime_tributario"
@@ -62,10 +64,46 @@ const Form1 = () => {
       </Flex>
       <FormControl mt="2%">
         <FormLabel htmlFor="cnpj" fontWeight={"normal"}>
-          Numero do CNPJ <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          Numero do CNPJ{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
         </FormLabel>
-        <Input id="email" name="cnpj" value={form.cnpj} onChange={handleForm} type="text" placeholder="EX: 00.000.000/0000-00" />
-        {/* <FormHelperText>Nunca Vamos Compartilhar suas informações</FormHelperText> */}
+        <Input
+          id="cnpj"
+          maxLength="18"
+          name="cnpj"
+          mask="99.999.999/9999-99"
+          maskChar={""}
+          value={form.cnpj}
+          onChange={handleForm}
+          type="text"
+          placeholder="EX: 00.000.000/0000-00"
+        />
+        <FormHelperText>Por favor, preencher o cnpj com o formato: <strong>00.000.000/0000-00</strong></FormHelperText>
+      </FormControl>
+      <FormControl mt="2%">
+        <FormLabel
+          htmlFor="documentacao_pj"
+          bg="green.300"
+          p="2"
+          rounded="8px"
+          color={"gray.500"}
+          fontWeight={"normal"}
+        >
+          Documentos recebidos?{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
+        </FormLabel>
+        <Input
+          id="documentacao_pj"
+          type="text"
+          placeholder="Contrato Social, Adt 1, Adt 2, etc..."
+          name="documentacao_pj"
+          value={form.documentacao_pj}
+          onChange={handleForm}
+        />
       </FormControl>
       <FormControl mt="2%">
         <FormLabel
@@ -76,7 +114,10 @@ const Form1 = () => {
           color={"white.500"}
           fontWeight={"normal"}
         >
-          Saiu todas as certidões? <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          Saiu todas as certidões?{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
         </FormLabel>
         <Input
           id="email"
@@ -86,7 +127,6 @@ const Form1 = () => {
           value={form.certidoes_PJ}
           onChange={handleForm}
         />
-        {/* <FormHelperText>Nunca Vamos Compartilhar suas informações</FormHelperText> */}
       </FormControl>
       <FormControl mt="2%">
         <FormLabel
@@ -97,10 +137,19 @@ const Form1 = () => {
           color={"white.500"}
           fontWeight={"normal"}
         >
-          Possui consultor especifico? <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          Possui consultor especifico?{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
         </FormLabel>
-        <Input id="email" name="consultor" value={form.consultor} onChange={handleForm} type="text" placeholder="Nome do Consultor" />
-        {/* <FormHelperText>Nunca Vamos Compartilhar suas informações</FormHelperText> */}
+        <Input
+          id="email"
+          name="consultor"
+          value={form.consultor}
+          onChange={handleForm}
+          type="text"
+          placeholder="Nome do Consultor"
+        />
       </FormControl>
     </>
   );
@@ -119,61 +168,6 @@ const Form2 = () => {
       >
         Administrador da empresa
       </Heading>
-      <FormControl as={GridItem} colSpan={[6, 3]}>
-        <FormLabel
-          htmlFor="estado_adm"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-        >
-          Estado
-        </FormLabel>
-        <Select
-          id="country"
-          name="estado_adm"
-          value={form.estado_adm}
-          onChange={handleForm}
-          autoComplete="estado_adm"
-          placeholder="Selecione Seu Estado"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        >
-          <option value="AC">Acre</option>
-          <option value="AL">Alagoas</option>
-          <option value="AP">Amapá</option>
-          <option value="AM">Amazonas</option>
-          <option value="BA">Bahia</option>
-          <option value="CE">Ceará</option>
-          <option value="DF">Distrito Federal</option>
-          <option value="ES">Espírito Santo</option>
-          <option value="GO">Goiás</option>
-          <option value="MA">Maranhão</option>
-          <option value="MT">Mato Grosso</option>
-          <option value="MS">Mato Grosso do Sul</option>
-          <option value="MG">Minas Gerais</option>
-          <option value="PA">Pará</option>
-          <option value="PB">Paraíba</option>
-          <option value="PR">Paraná</option>
-          <option value="PE">Pernambuco</option>
-          <option value="PI">Piauí</option>
-          <option value="RJ">Rio de Janeiro</option>
-          <option value="RN">Rio Grande do Norte</option>
-          <option value="RS">Rio Grande do Sul</option>
-          <option value="RO">Rondônia</option>
-          <option value="RR">Roraima</option>
-          <option value="SC">Santa Catarina</option>
-          <option value="SP">São Paulo</option>
-          <option value="SE">Sergipe</option>
-          <option value="TO">Tocantins</option>
-        </Select>
-      </FormControl>
-
       <FormControl as={GridItem} colSpan={6}>
         <FormLabel
           htmlFor="administrador"
@@ -185,12 +179,16 @@ const Form2 = () => {
           }}
           mt="2%"
         >
-          Informe o nome completo do administrador <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          Informe o nome completo do administrador{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
         </FormLabel>
         <Input
           type="text"
           name="administrador"
           id="administrador"
+          placeholder={"Nome completo do ADM"}
           value={form.administrador}
           onChange={handleForm}
           autoComplete="Name"
@@ -213,7 +211,10 @@ const Form2 = () => {
           }}
           mt="2%"
         >
-          Informe o CPF do administrador <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          Informe o CPF do administrador{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
         </FormLabel>
         <Input
           type="text"
@@ -233,31 +234,9 @@ const Form2 = () => {
         />
       </FormControl>
 
-      <FormControl mt="2%">
-        <FormLabel
-          htmlFor="certidoes_PF"
-          bg="red.300"
-          p="2"
-          rounded="8px"
-          color={"white.500"}
-          fontWeight={"normal"}
-        >
-          Saiu todas as certidões? <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
-        </FormLabel>
-        <Input
-          id="certidoes_PF"
-          type="text"
-          name="certidoes_PF"
-          value={form.certidoes_PF}
-          onChange={handleForm}
-          placeholder="Ex: Receita, Sefaz, Sefin ..."
-        />
-        {/* <FormHelperText>Nunca Vamos Compartilhar suas informações</FormHelperText> */}
-      </FormControl>
-
       <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
         <FormLabel
-          htmlFor="state"
+          htmlFor="telefone"
           fontSize="sm"
           fontWeight="md"
           color="gray.700"
@@ -266,7 +245,10 @@ const Form2 = () => {
           }}
           mt="2%"
         >
-          Telefone do Administrador <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          Telefone do Administrador{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
         </FormLabel>
         <Input
           type="tel"
@@ -283,7 +265,7 @@ const Form2 = () => {
           rounded="md"
         />
       </FormControl>
-
+      
       <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
         <FormLabel
           htmlFor="email"
@@ -295,7 +277,10 @@ const Form2 = () => {
           }}
           mt="2%"
         >
-          E-mail <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+          E-mail{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
         </FormLabel>
         <Input
           type="email"
@@ -310,6 +295,62 @@ const Form2 = () => {
           w="full"
           rounded="md"
         />
+      </FormControl>
+
+      <FormControl as={GridItem} colSpan={6}>
+        <FormLabel
+          htmlFor="documentacao_pf"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+          mt="2%"
+        >
+          Documentação do ADM Recebida?{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
+        </FormLabel>
+        <Input
+          type="text"
+          name="documentacao_pf"
+          id="documentacao_pf"
+          value={form.documentacao_pf}
+          onChange={handleForm}
+          focusBorderColor="brand.400"
+          placeholder={"RG, CPF, Comp. de Endereço, etc..."}
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        />
+      </FormControl>
+
+      <FormControl mt="2%">
+        <FormLabel
+          htmlFor="certidoes_PF"
+          bg="red.300"
+          p="2"
+          rounded="8px"
+          color={"white.500"}
+          fontWeight={"normal"}
+        >
+          Saiu todas as certidões?{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
+        </FormLabel>
+        <Input
+          id="certidoes_PF"
+          type="text"
+          name="certidoes_PF"
+          value={form.certidoes_PF}
+          onChange={handleForm}
+          placeholder="Ex: Receita, Sefaz, Sefin ..."
+        />
+        {/* <FormHelperText>Nunca Vamos Compartilhar suas informações</FormHelperText> */}
       </FormControl>
     </>
   );
@@ -343,7 +384,10 @@ const Form3 = () => {
               color="gray.500"
               rounded="md"
             >
-              Instituição  <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+              Instituição{" "}
+              <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+                *
+              </Text>
             </InputLeftAddon>
             <Input
               type="text"
@@ -376,7 +420,10 @@ const Form3 = () => {
               color="gray.500"
               rounded="md"
             >
-              Gerente:   <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+              Gerente:{" "}
+              <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+                *
+              </Text>
             </InputLeftAddon>
             <Input
               type="text"
@@ -414,7 +461,10 @@ const Form3 = () => {
             }}
           />
           <FormHelperText>
-            Descreva detalhes relevantes desta operação <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+            Descreva detalhes relevantes desta operação{" "}
+            <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+              *
+            </Text>
           </FormHelperText>
         </FormControl>
 
@@ -427,7 +477,10 @@ const Form3 = () => {
               color: "gray.50",
             }}
           >
-            data de cadastro <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>*</Text>
+            data de cadastro{" "}
+            <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+              *
+            </Text>
           </FormLabel>
           <InputGroup size="sm">
             <InputLeftAddon
@@ -460,9 +513,14 @@ const RegistroEmpresarial = () => {
   const { form, dados, setDados, clearForm } = useContext(DadosEmpresasContext);
 
   const cadastrar = () => {
-    if((form.cnpj !== "") && (form.razao_social !== "") && (form.cnpj !== "") && form.cpf !== ""){
+    if (
+      form.cnpj !== "" &&
+      form.razao_social !== "" &&
+      form.cnpj !== "" &&
+      form.cpf !== ""
+    ) {
       setDados([...dados, form]);
-      clearForm();    
+      clearForm();
       console.log(dados);
       toast({
         title: "Empresa Registrada com Sucesso",
@@ -471,16 +529,17 @@ const RegistroEmpresarial = () => {
         duration: 3000,
         isClosable: true,
       });
-    }else{
+    } else {
       toast({
         title: "Por favor Preencha Todos os Campos",
-        description: "Todos os Campos Indicados com o * precisam ser preenchidos",
+        description:
+          "Todos os Campos Indicados com o * precisam ser preenchidos",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
     }
-  }
+  };
   const toast = useToast();
   const [step, setStep] = useState(1);
   const [progress, setProgress] = useState(33.33);
