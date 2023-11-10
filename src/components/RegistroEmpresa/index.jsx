@@ -18,12 +18,14 @@ import {
   Textarea,
   FormHelperText,
   Text,
+  Stack,
+  Checkbox,
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import { DadosEmpresasContext } from "../../context/DadosEmpresa";
 
 const Form1 = () => {
-  const { form, handleForm } = useContext(DadosEmpresasContext);
+  const { form, handleForm, handleCheckbox } = useContext(DadosEmpresasContext);
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
@@ -39,8 +41,8 @@ const Form1 = () => {
           </FormLabel>
           <Input
             id="razao_social"
-            name="razao_social"
-            value={form.razao_social}
+            name="empresa.razao_social"
+            value={form.empresa.razao_social}
             onChange={handleForm}
             placeholder="Razão Social"
           />
@@ -55,8 +57,8 @@ const Form1 = () => {
           </FormLabel>
           <Input
             id="regime_tributario"
-            name="regime_tributario"
-            value={form.regime_tributario}
+            name="empresa.regime_tributario"
+            value={form["empresa"]["regime_tributario"]}
             onChange={handleForm}
             placeholder="Regime tributario"
           />
@@ -72,42 +74,163 @@ const Form1 = () => {
         <Input
           id="cnpj"
           maxLength="18"
-          name="cnpj"
-          mask="99.999.999/9999-99"
-          maskChar={""}
-          value={form.cnpj}
+          name="empresa.cnpj"
+          value={form.empresa.cnpj}
           onChange={handleForm}
           type="text"
           placeholder="EX: 00.000.000/0000-00"
         />
-        <FormHelperText>Por favor, preencher o cnpj com o formato: <strong>00.000.000/0000-00</strong></FormHelperText>
+        <FormHelperText>
+          Por favor, preencher o cnpj com o formato:{" "}
+          <strong>00.000.000/0000-00</strong>
+        </FormHelperText>
       </FormControl>
       <FormControl mt="2%">
+        <FormLabel htmlFor="cnpj" fontWeight={"normal"}>
+          Endereço:{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
+        </FormLabel>
+        <Input
+          id="Avenida"
+          name="empresa.endereco.logradouro"
+          value={form.empresa.endereco.logradouro}
+          onChange={handleForm}
+          type="text"
+          width={"40%"}
+          placeholder="Avenida:"
+        />
+        <Input
+          id="cnpj"
+          name="empresa.endereco.bairro"
+          value={form.empresa.endereco.bairro}
+          onChange={handleForm}
+          type="text"
+          width={"40%"}
+          placeholder="Bairro:"
+        />
+        <Input
+          id="cnpj"
+          name="empresa.endereco.numero"
+          value={form.empresa.endereco.numero}
+          onChange={handleForm}
+          type="text"
+          width={"20%"}
+          placeholder="Numero:"
+        />
+        <Input
+          id="cep"
+          name="empresa.endereco.cep"
+          value={form.empresa.endereco.cep}
+          onChange={handleForm}
+          type="text"
+          width={"50%"}
+          placeholder="CEP: 00000-000"
+        />
+        <Input
+          id="cidade"
+          name="empresa.endereco.cidade"
+          value={form.empresa.endereco.cidade}
+          onChange={handleForm}
+          type="text"
+          width={"50%"}
+          placeholder="Cidade:"
+        />
+        <FormHelperText>
+          Por favor, preencher o cnpj com o formato:{" "}
+          <strong>00.000.000/0000-00</strong>
+        </FormHelperText>
+      </FormControl>
+      <FormControl flex mt="2%">
         <FormLabel
           htmlFor="documentacao_pj"
           bg="green.300"
           p="2"
           rounded="8px"
-          color={"gray.500"}
-          fontWeight={"normal"}
+          color={"white.800"}
+          fontWeight={"bold"}
         >
           Documentos recebidos?{" "}
           <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
             *
           </Text>
         </FormLabel>
+        <Stack spacing={2} direction="column">
+          <Checkbox
+            name="empresa.documentacao_pj.ccmei"
+            value={form.empresa.documentacao_pj.ccmei}
+            onChange={handleCheckbox}
+            colorScheme="red"
+          >
+            CCMEI
+          </Checkbox>
+          <Checkbox
+            name="empresa.documentacao_pj.contrato_social"
+            value={form.empresa.documentacao_pj.contrato_social}
+            onChange={handleCheckbox}
+            colorScheme="green"
+          >
+            Contrato Social
+          </Checkbox>
+          <Checkbox
+            colorScheme="green"
+            name="empresa.documentacao_pj.alvara_de_funcionamento"
+            value={form.empresa.documentacao_pj.alvara_de_funcionamento}
+            onChange={handleCheckbox}
+          >
+            Alvará de funcionamento
+          </Checkbox>
+        </Stack>
         <Input
-          id="documentacao_pj"
-          type="text"
-          placeholder="Contrato Social, Adt 1, Adt 2, etc..."
-          name="documentacao_pj"
-          value={form.documentacao_pj}
+          w={"50%"}
+          placeholder="Possui quantos Aditivos? (Se sim informar a quantidade)"
+          name="empresa.documentacao_pj.aditivos"
+          value={form.empresa.documentacao_pj.aditivos}
+          onChange={handleForm}
+        />
+        <Input
+          w={"45%"}
+          placeholder="Informe o Faturamento dos Ultimos 12 meses"
+        />
+        <Text p="2" rounded="8px" bg="blue.100">
+          Possui Matriculas de imoveis?
+        </Text>
+        <Input
+          placeholder="Quantidade ex: 2"
+          w="20%"
+          name="empresa.documentacao_pj.matriculas.qdt"
+          value={form.empresa.documentacao_pj.matriculas.qdt}
+          onChange={handleForm}
+        />
+        <Input
+          placeholder="Informe as Matriculas: Ex 0001, 0002, 003"
+          name="empresa.documentacao_pj.matriculas.inscricoes"
+          value={form.empresa.documentacao_pj.matriculas.inscricoes}
+          onChange={handleForm}
+          w="80%"
+        />
+        <Text p="2" rounded="8px" bg="blue.100">
+          Possui CRLV de veiculos?
+        </Text>
+        <Input
+          placeholder="Quantidade ex: 2"
+          w="20%"
+          name="empresa.documentacao_pj.crlv_digital.qtd"
+          value={form.empresa.documentacao_pj.crlv_digital.qtd}
+          onChange={handleForm}
+        />
+        <Input
+          placeholder="Informe os veiculos: Ex Carro 1, Carro 2, Moto 1"
+          w="80%"
+          name="empresa.documentacao_pj.crlv_digital.veiculos"
+          value={form.empresa.documentacao_pj.crlv_digital.veiculos}
           onChange={handleForm}
         />
       </FormControl>
       <FormControl mt="2%">
         <FormLabel
-          htmlFor="certidoes_PJ"
+          htmlFor="empresa.certidoes_PJ"
           bg="red.300"
           p="2"
           rounded="8px"
@@ -123,8 +246,8 @@ const Form1 = () => {
           id="email"
           type="text"
           placeholder="Ex: Receita, Sefaz, Sefin ..."
-          name="certidoes_PJ"
-          value={form.certidoes_PJ}
+          name="empresa.certidoes_PJ"
+          value={form.empresa.certidoes_PJ}
           onChange={handleForm}
         />
       </FormControl>
@@ -156,7 +279,7 @@ const Form1 = () => {
 };
 
 const Form2 = () => {
-  const { form, handleForm } = useContext(DadosEmpresasContext);
+  const { form, handleForm, handleCheckbox } = useContext(DadosEmpresasContext);
   return (
     <>
       <Heading
@@ -186,10 +309,10 @@ const Form2 = () => {
         </FormLabel>
         <Input
           type="text"
-          name="administrador"
           id="administrador"
-          placeholder={"Nome completo do ADM"}
-          value={form.administrador}
+          placeholder={"Nome completo do administrador da empresa"}
+          name="administrador.nome_completo"
+          value={form.administrador.nome_completo}
           onChange={handleForm}
           autoComplete="Name"
           focusBorderColor="brand.400"
@@ -221,8 +344,8 @@ const Form2 = () => {
           placeholder="Ex: 000.000.000-22"
           pattern="/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/"
           required
-          name="cpf"
-          value={form.cpf}
+          name="administrador.cpf"
+          value={form.administrador.cpf}
           onChange={handleForm}
           id="city"
           autoComplete="city"
@@ -253,8 +376,8 @@ const Form2 = () => {
         <Input
           type="tel"
           placeholder="(XX) X XXXX-XXXX"
-          name="telefone"
-          value={form.telefone}
+          name="administrador.telefone"
+          value={form.administrador.telefone}
           onChange={handleForm}
           id="telefone"
           autoComplete="state"
@@ -265,7 +388,7 @@ const Form2 = () => {
           rounded="md"
         />
       </FormControl>
-      
+
       <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
         <FormLabel
           htmlFor="email"
@@ -284,43 +407,12 @@ const Form2 = () => {
         </FormLabel>
         <Input
           type="email"
-          name="email"
-          value={form.email}
+          _placeholder={"Digite o E-mail do Administrador"}
+          name="administrador.email"
+          value={form.administrador.email}
           onChange={handleForm}
           id="email"
-          autoComplete="email"
           focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        />
-      </FormControl>
-
-      <FormControl as={GridItem} colSpan={6}>
-        <FormLabel
-          htmlFor="documentacao_pf"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-          mt="2%"
-        >
-          Documentação do ADM Recebida?{" "}
-          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
-            *
-          </Text>
-        </FormLabel>
-        <Input
-          type="text"
-          name="documentacao_pf"
-          id="documentacao_pf"
-          value={form.documentacao_pf}
-          onChange={handleForm}
-          focusBorderColor="brand.400"
-          placeholder={"RG, CPF, Comp. de Endereço, etc..."}
           shadow="sm"
           size="sm"
           w="full"
@@ -329,8 +421,142 @@ const Form2 = () => {
       </FormControl>
 
       <FormControl mt="2%">
+        <FormLabel htmlFor="cnpj" fontWeight={"normal"}>
+          Endereço:{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
+        </FormLabel>
+        <Input
+          id="Avenida"
+          name="administrador.endereco.logradouro"
+          value={form.administrador.endereco.logradouro}
+          onChange={handleForm}
+          type="text"
+          width={"40%"}
+          placeholder="Avenida:"
+        />
+        <Input
+          id="cnpj"
+          name="administrador.endereco.bairro"
+          value={form.administrador.endereco.bairro}
+          onChange={handleForm}
+          type="text"
+          width={"40%"}
+          placeholder="Bairro:"
+        />
+        <Input
+          id="cnpj"
+          name="administrador.endereco.numero"
+          value={form.administrador.endereco.numero}
+          onChange={handleForm}
+          type="text"
+          width={"20%"}
+          placeholder="Numero:"
+        />
+        <Input
+          id="cep"
+          name="administrador.endereco.cep"
+          value={form.administrador.endereco.cep}
+          onChange={handleForm}
+          type="text"
+          width={"50%"}
+          placeholder="CEP: 00000-000"
+        />
+        <Input
+          id="cidade"
+          name="administrador.endereco.cidade"
+          value={form.administrador.endereco.cidade}
+          onChange={handleForm}
+          type="text"
+          width={"50%"}
+          placeholder="Cidade:"
+        />
+        <FormHelperText>
+          Por favor, preencher o cnpj com o formato:{" "}
+          <strong>00.000.000/0000-00</strong>
+        </FormHelperText>
+      </FormControl>
+
+      <FormControl flex mt="2%">
         <FormLabel
-          htmlFor="certidoes_PF"
+          htmlFor="documentacao_pf"
+          bg="green.300"
+          p="2"
+          rounded="8px"
+          color={"white.800"}
+          fontWeight={"bold"}
+        >
+          Documentos recebidos?{" "}
+          <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+            *
+          </Text>
+        </FormLabel>
+        <Stack spacing={2} direction="column">
+          <Checkbox
+            name="administrador.documentacao_pf.rg_cpf_cnh"
+            value={form.administrador.documentacao_pf.rg_cpf_cnh}
+            onChange={handleCheckbox}
+            colorScheme="red"
+          >
+            RG, CPF ou CNH
+          </Checkbox>
+          <Checkbox
+            name="administrador.documentacao_pf.casado"
+            value={form.administrador.documentacao_pf.casado}
+            onChange={handleCheckbox}
+            colorScheme="green"
+          >
+            Casado(a)?
+          </Checkbox>
+          <Checkbox
+            colorScheme="green"
+            name="administrador.documentacao_pf.imposto_de_renda"
+            value={form.administrador.documentacao_pf.imposto_de_renda}
+            onChange={handleCheckbox}
+          >
+            Imposto de renda Ultimos 2 exercicios
+          </Checkbox>
+        </Stack>
+        <Text p="2" rounded="8px" bg="blue.100">
+          Possui Matriculas de imoveis?
+        </Text>
+        <Input
+          placeholder="Quantidade ex: 2"
+          w="20%"
+          name="administrador.documentacao_pf.matriculas.qdt"
+          value={form.administrador.documentacao_pf.matriculas.qdt}
+          onChange={handleForm}
+        />
+        <Input
+          placeholder="Informe as Matriculas: Ex 0001, 0002, 003"
+          name="administrador.documentacao_pf.matriculas.inscricoes"
+          value={form.administrador.documentacao_pf.matriculas.inscricoes}
+          onChange={handleForm}
+          w="80%"
+        />
+        <Text p="2" rounded="8px" bg="blue.100">
+          Possui CRLV de veiculos?
+        </Text>
+        <Input
+          placeholder="Quantidade ex: 2"
+          w="20%"
+          name="administrador.documentacao_pf.crlv_digital.qtd"
+          value={form.administrador.documentacao_pf.crlv_digital.qtd}
+          onChange={handleForm}
+        />
+        <Input
+          placeholder="Informe os veiculos: Ex Carro 1, Carro 2, Moto 1"
+          w="80%"
+          name="administrador.documentacao_pf.crlv_digital.veiculos"
+          value={form.administrador.documentacao_pf.crlv_digital.veiculos}
+          onChange={handleForm}
+        />
+      </FormControl>
+
+      <FormControl mt="2%">
+        <FormLabel
+          htmlFor="empresa.certidoes_PJ"
           bg="red.300"
           p="2"
           rounded="8px"
@@ -343,14 +569,13 @@ const Form2 = () => {
           </Text>
         </FormLabel>
         <Input
-          id="certidoes_PF"
+          id="email"
           type="text"
-          name="certidoes_PF"
-          value={form.certidoes_PF}
-          onChange={handleForm}
           placeholder="Ex: Receita, Sefaz, Sefin ..."
+          name="administrador.certidoes_PF"
+          value={form.administrador.certidoes_PF}
+          onChange={handleForm}
         />
-        {/* <FormHelperText>Nunca Vamos Compartilhar suas informações</FormHelperText> */}
       </FormControl>
     </>
   );
@@ -391,8 +616,8 @@ const Form3 = () => {
             </InputLeftAddon>
             <Input
               type="text"
-              name="banco"
-              value={form.banco}
+              name="banco.instituicao"
+              value={form.banco.instituicao}
               onChange={handleForm}
               placeholder="Em qual banco esta sendo feito o trabalho?"
               focusBorderColor="brand.400"
@@ -427,10 +652,46 @@ const Form3 = () => {
             </InputLeftAddon>
             <Input
               type="text"
-              name="gerente"
-              value={form.gerente}
+              name="banco.gerente"
+              value={form.banco.gerente}
               onChange={handleForm}
               placeholder="Qual Gerente responsavel pela operação"
+              focusBorderColor="brand.400"
+              rounded="md"
+            />
+          </InputGroup>
+        </FormControl>
+        <FormControl as={GridItem} colSpan={[3, 2]}>
+          <FormLabel
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+            Valor do Faturamento:
+          </FormLabel>
+          <InputGroup size="sm">
+            <InputLeftAddon
+              bg="gray.50"
+              _dark={{
+                bg: "gray.800",
+              }}
+              color="gray.500"
+              rounded="md"
+            >
+              Faturamento Anual:{" "}
+              <Text display={"inline"} color={"red.500"} fontWeight={"bold"}>
+                *
+              </Text>
+            </InputLeftAddon>
+            <Input
+              type="text"
+              name="banco.faturamento_enviado"
+              value={form.banco.faturamento_enviado}
+              onChange={handleForm}
+              placeholder="ex: R$: 1.000.000,00"
               focusBorderColor="brand.400"
               rounded="md"
             />
@@ -450,8 +711,8 @@ const Form3 = () => {
           </FormLabel>
           <Textarea
             placeholder="Detalhes"
-            name="detalhes_da_operacao"
-            value={form.detalhes_da_operacao}
+            name="banco.detalhes_da_operacao"
+            value={form.banco.detalhes_da_operacao}
             onChange={handleForm}
             rows={3}
             shadow="sm"
@@ -494,7 +755,7 @@ const Form3 = () => {
               Data de Cadastro
             </InputLeftAddon>
             <Input
-              type="datetime-local"
+              type="text"
               name="data_do_cadastro"
               value={form.data_do_cadastro}
               onChange={handleForm}

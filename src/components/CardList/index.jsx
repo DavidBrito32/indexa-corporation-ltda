@@ -1,112 +1,183 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/layout";
-import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
-import brasil from "./assets/brasao.png";
-import { FcOpenedFolder } from "react-icons/fc";
-import { ImBin } from "react-icons/im";
-import CardEmpresas from "../CardEmpresas";
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Text,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useRef } from "react";
+import { FcFile } from "react-icons/fc";
 
-const CardList = ({ empresa, setDados, dados }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const deleteItem = () => {
-      const novasEmpresas = dados.filter((item) => item.id !== empresa.id);
-      setDados(novasEmpresas);
-      localStorage.setItem('dados', JSON.stringify(novasEmpresas))
-    }
+const CardList = ({ empresa, dados }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: editar, onOpen: editarOpen, onClose: editarFechar } = useDisclosure();
+  const btnRef = useRef()
+
   return (
     <>
-      <Container>
-        <Flex
-          w={{ base: "100%", md: "400px" }}
-          shadow={"-5px 0px 30px #000000"}
-          gap={"20px"}
-          h="110px"
-          bg={"green.100"}
-        >
-          <Image
-            src={brasil}
-            objectFit={"contain"}
-            w={{ base: "20%" }}
-            alt="Brasao_do_Brasil"
-          />
-          <Box flex={1} p="2" position={"relative"}>
-            <Heading
-              textAlign={"center"}
-              fontSize={{ base: ".9rem", md: "1rem" }}
+      <Tbody bg={"indexa.500"} color={"white"} fontWeight={"bold"}>
+        <Tr>
+          <Td>{empresa["empresa"]['cnpj']}</Td>
+          <Td>{empresa["empresa"]["razao_social"]}</Td>
+          <Td isNumeric>
+            <Button
+              _hover={{ bg: "green.500" }}
+              bg={"transparent"}
+              onClick={onOpen}
             >
-              {empresa && empresa.razao_social}
-            </Heading>
-            <Text
-              fontSize={{ base: ".8rem", md: "1rem" }}
-              fontWeight={"bold"}
-              color={"red.500"}
-            >
-              CNPJ: {empresa && empresa.cnpj}
-            </Text>
-            <Text
-              fontSize={{ base: ".9rem", md: "1rem" }}
-              w={"full"}
-              overflow={"hidden"}
-              fontWeight={"bold"}
-            >
-              Consultor: {empresa && empresa.consultor}
-            </Text>
-            <Text color={"yellow.600"}>Status: {empresa && empresa.status}</Text>
-            <Box
-              transition={"all ease-in 200ms"}
-              _active={{ transform: "scale(.97)" }}
-              position={"absolute"}
-              fontSize={{ base: "1.5rem", md: "1.9rem" }}
-              _hover={{
-                fontSize: { base: "1.8rem", md: "2.3rem" },
-                transform: "rotate(15deg)",
-              }}
-              top={{ base: "0px", md: "10px" }}
-              right={{ base: "0", md: "10px" }}
-            >
-              <FcOpenedFolder onClick={onOpen} title="Ver detalhes" cursor={"pointer"} />
-            </Box>
-            <Box
-              transition={"all ease-in 200ms"}
-              _active={{ transform: "scale(.97)" }}
-              position={"absolute"}
-              fontSize={{ base: "1.5rem", md: "1.9rem" }}
-              _hover={{
-                fontSize: { base: "1.8rem", md: "2.3rem" },
-                transform: "rotate(15deg)",
-                color: "red.500"
-              }}
-              bottom={{ base: "0px", md: "10px" }}
-              right={{ base: "0", md: "10px" }}
-            >
-              <ImBin onClick={deleteItem} title="Ver detalhes" cursor={"pointer"} />
-            </Box>
-          </Box>
-        </Flex>
-      </Container>
-      <Modal
-        // isCentered
-        onClose={onClose}
-        isOpen={isOpen}
-        motionPreset='slideInRight'
-        bg="#00000085"
-        size="xl"
-      >
-        <ModalOverlay w="full" />
-        <ModalContent  bg="#FFFFFF">
-          <ModalHeader textAlign={"center"} w="full">Detalhes da empresa</ModalHeader>
+              <FcFile fontSize={"24px"} />
+            </Button>
+          </Td>
+        </Tr>
+      </Tbody>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent bg="white.300">
+          <ModalHeader textAlign={"center"} textTransform={"capitalize"}>
+            {empresa["empresa"]["razao_social"]}
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <CardEmpresas empresa={empresa} />
+          <ModalBody maxH={"50vh"} overflowY={"auto"}>
+            <Flex flexDirection={"column"} gap={"10px"}>
+              <Flex justifyContent={"space-between"}>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                CNPJ:{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  {empresa.empresa.cnpj}
+                </Text>
+              </Text>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                Regime Tributario:{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  {empresa.empresa.regime_tributario}
+                </Text>
+              </Text>
+              </Flex>
+              <Flex justifyContent={"space-between"}>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                Gestor:{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  {empresa.administrador.nome_completo}
+                </Text>
+              </Text>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                CPF:{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  {empresa.administrador.cpf}
+                </Text>
+              </Text>
+              </Flex>
+              <Flex justifyContent={"space-between"}>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                Telefone:{" "}
+                <Text fontStyle={"italic"} fontWeight={"normal"} color={"blue.500"}>
+                  {empresa.administrador.telefone}
+                </Text>
+              </Text>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                E-mail:{" "}
+                <Text fontStyle={"italic"} fontWeight={"normal"} color={"blue.500"}>
+                  {empresa.administrador.email}
+                </Text>
+              </Text>
+              </Flex>
+
+              
+              <Text color={"red.500"} fontWeight={"bold"}>
+                Consultor:{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  {empresa.consultor}
+                </Text>
+              </Text>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                Documentação PJ:{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  
+                </Text>
+              </Text>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                Documentação PF:{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  
+                </Text>
+              </Text>
+              <Text color={"red.500"} fontWeight={"bold"}>
+                Banco Escolhido{" "}
+                <Text fontWeight={"normal"} color={"black"}>
+                  
+                </Text>
+              </Text>
+            </Flex>
           </ModalBody>
-          <ModalFooter w="full">
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Fechar
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button
+              _hover={{ bg: "yellow.600" }}
+              color={"white.500"}
+              bg="red.400"
+              ref={btnRef}
+              onClick={editarOpen}
+            >
+              Editar Informações
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+      <Drawer
+        isOpen={editar}
+        placement='right'
+        onClose={editarFechar}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent 
+          bg="white.500"
+        >
+          <DrawerCloseButton />
+          <DrawerHeader>Create your account</DrawerHeader>
+
+          <DrawerBody>
+            <Input placeholder='Type here...' />
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant='outline' mr={3} onClick={editarFechar}>
+              Cancel
+            </Button>
+            <Button colorScheme='blue'>Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };
