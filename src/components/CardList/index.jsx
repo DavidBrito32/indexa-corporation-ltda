@@ -35,14 +35,18 @@ import { FcFile } from "react-icons/fc";
 
 const CardList = ({ empresa, dados }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: editar, onOpen: editarOpen, onClose: editarFechar } = useDisclosure();
-  const btnRef = useRef()
+  const {
+    isOpen: editar,
+    onOpen: editarOpen,
+    onClose: editarFechar,
+  } = useDisclosure();
+  const btnRef = useRef();
 
   return (
     <>
       <Tbody bg={"indexa.500"} color={"white"} fontWeight={"bold"}>
         <Tr>
-          <Td>{empresa["empresa"]['cnpj']}</Td>
+          <Td>{empresa["empresa"]["cnpj"]}</Td>
           <Td>{empresa["empresa"]["razao_social"]}</Td>
           <Td isNumeric>
             <Button
@@ -66,49 +70,56 @@ const CardList = ({ empresa, dados }) => {
           <ModalBody maxH={"50vh"} overflowY={"auto"}>
             <Flex flexDirection={"column"} gap={"10px"}>
               <Flex justifyContent={"space-between"}>
-              <Text color={"red.500"} fontWeight={"bold"}>
-                CNPJ:{" "}
-                <Text fontWeight={"normal"} color={"black"}>
-                  {empresa.empresa.cnpj}
+                <Text color={"red.500"} fontWeight={"bold"}>
+                  CNPJ:{" "}
+                  <Text fontWeight={"normal"} color={"black"}>
+                    {empresa.empresa.cnpj}
+                  </Text>
                 </Text>
-              </Text>
-              <Text color={"red.500"} fontWeight={"bold"}>
-                Regime Tributario:{" "}
-                <Text fontWeight={"normal"} color={"black"}>
-                  {empresa.empresa.regime_tributario}
+                <Text color={"red.500"} fontWeight={"bold"}>
+                  Regime Tributario:{" "}
+                  <Text fontWeight={"normal"} color={"black"}>
+                    {empresa.empresa.regime_tributario}
+                  </Text>
                 </Text>
-              </Text>
               </Flex>
               <Flex justifyContent={"space-between"}>
-              <Text color={"red.500"} fontWeight={"bold"}>
-                Gestor:{" "}
-                <Text fontWeight={"normal"} color={"black"}>
-                  {empresa.administrador.nome_completo}
+                <Text color={"red.500"} fontWeight={"bold"}>
+                  Gestor:{" "}
+                  <Text fontWeight={"normal"} color={"black"}>
+                    {empresa.administrador.nome_completo}
+                  </Text>
                 </Text>
-              </Text>
-              <Text color={"red.500"} fontWeight={"bold"}>
-                CPF:{" "}
-                <Text fontWeight={"normal"} color={"black"}>
-                  {empresa.administrador.cpf}
+                <Text color={"red.500"} fontWeight={"bold"}>
+                  CPF:{" "}
+                  <Text fontWeight={"normal"} color={"black"}>
+                    {empresa.administrador.cpf}
+                  </Text>
                 </Text>
-              </Text>
               </Flex>
               <Flex justifyContent={"space-between"}>
-              <Text color={"red.500"} fontWeight={"bold"}>
-                Telefone:{" "}
-                <Text fontStyle={"italic"} fontWeight={"normal"} color={"blue.500"}>
-                  {empresa.administrador.telefone}
+                <Text color={"red.500"} fontWeight={"bold"}>
+                  Telefone:{" "}
+                  <Text
+                    fontStyle={"italic"}
+                    fontWeight={"normal"}
+                    color={"blue.500"}
+                  >
+                    {empresa.administrador.telefone}
+                  </Text>
                 </Text>
-              </Text>
-              <Text color={"red.500"} fontWeight={"bold"}>
-                E-mail:{" "}
-                <Text fontStyle={"italic"} fontWeight={"normal"} color={"blue.500"}>
-                  {empresa.administrador.email}
+                <Text color={"red.500"} fontWeight={"bold"}>
+                  E-mail:{" "}
+                  <Text
+                    fontStyle={"italic"}
+                    fontWeight={"normal"}
+                    color={"blue.500"}
+                  >
+                    {empresa.administrador.email}
+                  </Text>
                 </Text>
-              </Text>
               </Flex>
 
-              
               <Text color={"red.500"} fontWeight={"bold"}>
                 Consultor:{" "}
                 <Text fontWeight={"normal"} color={"black"}>
@@ -117,21 +128,15 @@ const CardList = ({ empresa, dados }) => {
               </Text>
               <Text color={"red.500"} fontWeight={"bold"}>
                 Documentação PJ:{" "}
-                <Text fontWeight={"normal"} color={"black"}>
-                  
-                </Text>
+                <Text fontWeight={"normal"} color={"black"}></Text>
               </Text>
               <Text color={"red.500"} fontWeight={"bold"}>
                 Documentação PF:{" "}
-                <Text fontWeight={"normal"} color={"black"}>
-                  
-                </Text>
+                <Text fontWeight={"normal"} color={"black"}></Text>
               </Text>
               <Text color={"red.500"} fontWeight={"bold"}>
                 Banco Escolhido{" "}
-                <Text fontWeight={"normal"} color={"black"}>
-                  
-                </Text>
+                <Text fontWeight={"normal"} color={"black"}></Text>
               </Text>
             </Flex>
           </ModalBody>
@@ -155,26 +160,24 @@ const CardList = ({ empresa, dados }) => {
 
       <Drawer
         isOpen={editar}
-        placement='right'
+        placement="right"
         onClose={editarFechar}
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent 
-          bg="white.500"
-        >
+        <DrawerContent bg="white.500">
           <DrawerCloseButton />
           <DrawerHeader>Create your account</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder='Type here...' />
+            <Input placeholder="Type here..." />
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={editarFechar}>
+            <Button variant="outline" mr={3} onClick={editarFechar}>
               Cancel
             </Button>
-            <Button colorScheme='blue'>Save</Button>
+            <Button colorScheme="blue">Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

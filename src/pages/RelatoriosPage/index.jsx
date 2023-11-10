@@ -39,30 +39,35 @@ const RelatoriosPage = () => {
         />
         <FcSearch cursor={"pointer"} fontSize={"30px"} />
       </Box>
-      <TableContainer minH={"70vh"} overflowY={"auto"} m="50px auto" w={{ md: "70%"}}>      
-      <Table variant="simple" colorScheme="teal">
-        <Thead>
-          <Tr>
-            <Th>CNPJ</Th>
-            <Th>Razão Social</Th>
-            <Th isNumeric>Detalhes</Th>
-          </Tr>
-        </Thead>
-            {dados.map((item) => (
+      <TableContainer
+        minH={"70vh"}
+        overflowY={"auto"}
+        m="50px auto"
+        w={{ md: "70%" }}
+      >
+        <Table variant="simple" colorScheme="teal">
+          <Thead>
+            <Tr>
+              <Th>CNPJ</Th>
+              <Th>Razão Social</Th>
+              <Th isNumeric>Detalhes</Th>
+            </Tr>
+          </Thead>
+          {dados.map((item) => (
             <CardList key={item.id} empresa={item} dados={dados} />
-            ))}
-        <Tfoot>
-          <Tr>
-            <Th>Numero de empresas Cadastradas</Th>
-            <Th>Total</Th>
-            <Th isNumeric>{dados.length} empresas</Th>
-          </Tr>
-        </Tfoot>
-      </Table>
+          ))}
+          <Tfoot>
+            <Tr>
+              <Th>Numero de empresas Cadastradas</Th>
+              <Th>Total</Th>
+              <Th isNumeric>{dados.length} empresas</Th>
+            </Tr>
+          </Tfoot>
+        </Table>
       </TableContainer>
     </>
   );
 };
 
 export default RelatoriosPage;
-7
+7;
