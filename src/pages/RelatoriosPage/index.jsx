@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Box, Heading } from "@chakra-ui/layout";
 import CardList from "../../components/CardList";
 import {
@@ -12,12 +13,16 @@ import {
 import { FcSearch } from "react-icons/fc";
 import { useContext, useState } from "react";
 import { DadosEmpresasContext } from "../../context/DadosEmpresa";
+import { useAxios } from "../../hooks/useAxios";
+import { BASE_URL } from "../../constants/BASE_URL";
 
 const RelatoriosPage = () => {
+  const { data, loading, error } = useAxios(BASE_URL);
+
   // eslint-disable-next-line no-unused-vars
   const { dados, setDados } = useContext(DadosEmpresasContext);
   const [search, setSearch] = useState("");
-  console.log(dados);
+  console.log(data);
   return (
     <>
       <Heading textAlign={"center"}>Relação de empresas cadastradas</Heading>
@@ -43,7 +48,7 @@ const RelatoriosPage = () => {
         minH={"70vh"}
         overflowY={"auto"}
         m="50px auto"
-        w={{ md: "70%" }}
+        w={{ md: "80%" }}
       >
         <Table variant="simple" colorScheme="teal">
           <Thead>
@@ -53,14 +58,16 @@ const RelatoriosPage = () => {
               <Th isNumeric>Detalhes</Th>
             </Tr>
           </Thead>
-          {dados.map((item) => (
+          {data && data
+          .filter((item) => item.empresa.cnpj.includes(search))
+          .map((item) => (
             <CardList key={item.id} empresa={item} dados={dados} />
           ))}
           <Tfoot>
             <Tr>
               <Th>Numero de empresas Cadastradas</Th>
               <Th>Total</Th>
-              <Th isNumeric>{dados.length} empresas</Th>
+              <Th isNumeric>{data && data.length} empresas</Th>
             </Tr>
           </Tfoot>
         </Table>

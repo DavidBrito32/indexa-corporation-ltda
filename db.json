@@ -1,0 +1,74 @@
+{
+  "empresas": [
+    {
+      "id": "2023-11-10T19:30:39.889Z",
+      "data_do_cadastro": "10/11/2023",
+      "consultor": "Gerardo Junior",
+      "empresa": {
+        "cnpj": "22.111.651/0001-91",
+        "razao_social": "MARIA SALETE RAMOS DE OLIVEIRA COSTA - UNIPESSOAL LTDA",
+        "regime_tributario": "Simples Nacional",
+        "documentacao_pj": {
+          "ccmei": true,
+          "contrato_social": true,
+          "aditivos": "4",
+          "alvara_de_funcionamento": true,
+          "faturamento": {
+            "data": "",
+            "valor": ""
+          },
+          "matriculas": {
+            "qdt": "1",
+            "inscricoes": "AV ENGENHEIRO LEAL LIMA VERDE"
+          },
+          "crlv_digital": {
+            "qtd": "1",
+            "veiculos": "ONIX"
+          }
+        },
+        "certidoes_PJ": "Ausencia: RFB, SEFIN",
+        "endereco": {
+          "logradouro": "AVENIDA ENGENHEIRO LEAL LIMA VERDE",
+          "numero": "497",
+          "bairro": "SAPIRANGA",
+          "cidade": "FORTALEZA-CE",
+          "cep": "60.833.175"
+        }
+      },
+      "administrador": {
+        "nome_completo": "MARIA SALETE RAMOS DE OLIVEIRA COSTA",
+        "cpf": "946.196.463-34",
+        "telefone": "(85) 9 98963-9140",
+        "email": "salete@gmail.com",
+        "documentacao_pf": {
+          "rg_cpf_cnh": true,
+          "casado": true,
+          "imposto_de_renda": true,
+          "matriculas": {
+            "qdt": "NÃO POSSUI",
+            "inscricoes": "NÃO POSSUI"
+          },
+          "crlv_digital": {
+            "qtd": "1",
+            "veiculos": "ONIX"
+          }
+        },
+        "certidoes_PF": "SIM",
+        "endereco": {
+          "logradouro": "AVENIDA ENGENHEIRO LEAL LIMA VERDE",
+          "numero": "497",
+          "bairro": "SAPIRANGA",
+          "cidade": "FORTALEZA",
+          "cep": "60833175"
+        }
+      },
+      "banco": {
+        "instituicao": "Banco do Brasil",
+        "gerente": "Klecio Prado",
+        "status": "",
+        "detalhes_da_operacao": "Ela Pegou 80 mil de pronampe",
+        "faturamento_enviado": "1.580.356,00"
+      }
+    }
+  ]
+}

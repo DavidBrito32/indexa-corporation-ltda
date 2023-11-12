@@ -23,6 +23,8 @@ import {
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import { DadosEmpresasContext } from "../../context/DadosEmpresa";
+import axios from "axios";
+import { BASE_URL } from "../../constants/BASE_URL";
 
 const Form1 = () => {
   const { form, handleForm, handleCheckbox } = useContext(DadosEmpresasContext);
@@ -773,14 +775,28 @@ const Form3 = () => {
 const RegistroEmpresarial = () => {
   const { form, dados, setDados, clearForm } = useContext(DadosEmpresasContext);
 
+  const enviaData = async () => {
+    try{
+      await axios.post(BASE_URL, form).then(()=>{
+        console.log("Dados Enviados Com Sucesso");
+      })
+    }catch {((e) => {
+      console.log(e.message);
+  })
+  }
+  } 
+
   const cadastrar = () => {
     if (
-      form.cnpj !== "" &&
-      form.razao_social !== "" &&
-      form.cnpj !== "" &&
-      form.cpf !== ""
+      form.empresa.cnpj !== "" &&
+      form.empresa.razao_social !== "" &&
+      form.administrador.cpf !== "" && 
+      form.consultor !== ""
     ) {
       setDados([...dados, form]);
+      enviaData();
+
+
       clearForm();
       console.log(dados);
       toast({
